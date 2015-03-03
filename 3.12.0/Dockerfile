@@ -23,7 +23,7 @@ RUN apt-get update \
 	&& cd /deploy/mono \
 	&& bash ./autogen.sh --enable-llvm=yes \
 	&& make \
-	&& make get-monolite-latest
+	&& make get-monolite-latest \
 	&& make install \
 	&& apt-get remove -y --purge $DEPENDENCIES \
 	&& rm -rf /deploy \
