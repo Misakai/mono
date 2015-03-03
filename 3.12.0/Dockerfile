@@ -1,9 +1,11 @@
 FROM debian:wheezy
 MAINTAINER Roman Atachiants "roman@misakai.com"
 
-# Environment variables
+# The versions (github branches) that should be pulled and compiled
 ENV LLVM_VERSION=mono-3.4.0
 ENV MONO_VERSION=mono-3.12.0.76
+
+# The dependencies needed for the compilation process, they will be deleted once the docker image is baked
 ENV DEPENDENCIES="curl git autoconf libtool automake build-essential mono-devel gettext python"
 WORKDIR /deploy
 
@@ -21,6 +23,7 @@ RUN apt-get update \
 	&& cd /deploy/mono \
 	&& bash ./autogen.sh --enable-llvm=yes \
 	&& make \
+	&& make get-monolite-latest
 	&& make install \
 	&& apt-get remove -y --purge $DEPENDENCIES \
 	&& rm -rf /deploy \
