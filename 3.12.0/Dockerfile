@@ -22,8 +22,8 @@ RUN apt-get update \
 	&& git clone git://github.com/mono/mono --branch $MONO_VERSION  \
 	&& cd /deploy/mono \
 	&& bash ./autogen.sh --enable-llvm=yes \
-	&& make \
 	&& make get-monolite-latest \
+	&& make \
 	&& make install \
 	&& apt-get remove -y --purge $DEPENDENCIES \
 	&& rm -rf /deploy \
