@@ -3,7 +3,7 @@ MAINTAINER Roman Atachiants "roman@misakai.com"
 
 # Environment variables
 ENV llvm_version=mono-3.4.0
-ENV mono_version=mono-3.12.0
+ENV mono_version=mono-3.12.0.76
 WORKDIR /deploy
 
 # Based on: https://github.com/mono/docker
