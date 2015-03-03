@@ -8,7 +8,7 @@ WORKDIR /deploy
 
 # Based on: https://github.com/mono/docker
 RUN apt-get update \
-	&& apt-get install -y curl git build-essential \
+	&& apt-get install -y curl git autoconf libtool automake build-essential mono-devel gettext \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
@@ -23,7 +23,7 @@ RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 3FA7E0328081BFF6A14DA29AA6A1
 # Compile LLVM
 RUN git clone git://github.com/mono/llvm.git --branch $llvm_version
 RUN cd llvm
-RUN bash ./configure --enable-optimized --enable-targets="x86 x86_64"
+RUN ./configure --enable-optimized --enable-targets="x86 x86_64"
 RUN make
 RUN make install
 
