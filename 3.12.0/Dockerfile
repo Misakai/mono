@@ -25,7 +25,7 @@ RUN apt-get update \
 	&& make \
 	&& make install \
 	&& apt-get remove -y --purge $SETUP_TOOLS \
-	&& apt-get autoremove \
+	&& apt-get autoremove -y \
 	&& rm -rf /deploy \
 	&& mkdir /app
 
