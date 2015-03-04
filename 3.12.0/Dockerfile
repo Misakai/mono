@@ -10,7 +10,7 @@ ENV SETUP_TOOLS="git autoconf libtool automake build-essential mono-devel gettex
 WORKDIR /deploy
 
 RUN apt-get update \
-	&& apt-get install -y curl $SETUP_TOOLS \
+	&& apt-get install -y curl unzip s3cmd $SETUP_TOOLS \
 	&& apt-key adv --keyserver pgp.mit.edu --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
 	&& git clone git://github.com/mono/llvm.git --branch $LLVM_VERSION \
 	&& cd /deploy/llvm \
@@ -25,6 +25,7 @@ RUN apt-get update \
 	&& make \
 	&& make install \
 	&& apt-get remove -y --purge $SETUP_TOOLS \
+	&& apt-get autoremove \
 	&& rm -rf /deploy \
 	&& mkdir /app
 
